@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Impact Extensions</title>
+    <link rel="stylesheet" href="Style.CSS">
+    <link rel="icon" href="Images/Favicon.ico">
+
+    <!-- Website Sharing MetaData -->
+    <meta name="description" content="Free extensions for WarpCore, The ultimate scratch mod!">
+    <meta name="keywords" content="Penguinmod, WarpCore, Turbowarp, Extensions, Pluginwarp">
+    <meta property="og:title" content="Impact Extensions">
+    <meta property="og:description" content="Free extensions for WarpCore, The ultimate scratch mod!">
+    <meta property="og:image" content="https://Warp-Core.github.io/Impact/Images/Thumbnail.png">
+    <meta property="og:url" content="https://Warp-Core-PW.github.io/Impact/">
+    <meta name="twitter:title" content="Impact Extensions">
+    <meta name="twitter:description" content="Free extensions for WarpCore, The ultimate scratch mod!">
+    <meta name="twitter:image" content="https://Warp-Core+PW.github.io/Impact/Images/Thumbnail.png">
+
+    <style>
+        /* Popup Styling */
+        .popup-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            visibility: hidden;
+            opacity: 0;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        .popup {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            width: 300px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .popup-header {
+            font-size: 20px;
+            font-weight: bold;
+        }
+        .popup-message {
+            margin: 15px 0;
+        }
+        .close-btn {
+            background: #ff4d4d;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            width: 100%;
+        }
+        .close-btn:hover {
+            background: #cc0000;
+        }
+
+        /* Header Container */
+        .header-container {
+            display: flex;
+            align-items: center;
+            gap: 10px; /* Space between header and button */
+        }
+        .download-btn {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .download-btn:hover {
+            background-color: #0056b3;
+        }
+
+        /* Center H1 and H2 */
+        h1, h2.ToastingNoa {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Popup Message -->
+    <div id="popupContainer" class="popup-container">
+        <div class="popup">
+            <div class="popup-header">Whats New!</div>
+            <div class="popup-message" id="popupMessage">
+                Impact Has been remade with proper credits! <br><br>
+		    -The Warp Core Team
+            </div>
+            <button class="close-btn" onclick="closePopup()">Close</button>
+        </div>
+    </div>
+
+
+
+
+    <h2 class="ToastingNoa">Impact Gallery</h2>
+    <h3 class="DiscordServer" style="text-align: center; padding: 1%;">
+        <img draggable="false" src="Images/discord.png">
+        <a class="Link" href="https://discord.gg/PzFZekdKp4">Join our discord server!</a>
+    </h3>
+    <h4 style="text-align: center;">Mode: <span><button type="button" data-toggle="null" class="ModeButton">Loading</button></span></h4>
+    
+    <div class="SearchBox"><input class="SearchField" type="search" placeholder="Search"></div>
+    <ul class="file-tree" id="file-tree" data-loaded="false"></ul>
+    <div id="file-content"></div>
+
+    <!-- Spinner for loading -->
+    
+    <div class="spinner" id="spinner" style="display: block;"></div>
+	
+	<button class="download-btn" onclick="downloadRepo()">Download Impact</button>
+
+    <footer class="Footer">
+        Impact Extensions sourced from many creators! • Contact for issues in discord server 
+        <br>Website Owner - Hampter<br>
+	<br>Website Developer - Halu<br>
+	<br> Really Cool Guy - Lou<br>
+        Check out <a class="Link" href="https://Warp-Core-PW.github.io/Uploader/">UploadWarp</a> and 
+        <a class="Link" href="https://Warp-Core-PW.github.io/WarpForge/editor/">WarpForge</a> - Hampter
+    </footer>
+
+
+    <script src="ExtensionLoader.js"></script>
+    <script src="ExtensionDownloader.js"></script>
+
+
+    <script>
+        // Function to Open Popup
+        function openPopup() {
+            document.getElementById("popupContainer").style.visibility = "visible";
+            document.getElementById("popupContainer").style.opacity = "1";
+        }
+
+        // Function to Close Popup
+        function closePopup() {
+            document.getElementById("popupContainer").style.opacity = "0";
+            setTimeout(() => {
+                document.getElementById("popupContainer").style.visibility = "hidden";
+            }, 300);
+        }
+
+        // Auto-open popup after 1 second
+        setTimeout(openPopup, 1000);
+
+        // Function to Download Repo ZIP
+        function downloadRepo() {
+            window.location.href = "https://github.com/Warp-Core-PW/Impact/archive/refs/heads/main.zip";
+        }
+    </script>
+
+</body>
+</html>
