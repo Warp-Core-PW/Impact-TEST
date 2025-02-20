@@ -1,5 +1,5 @@
 const Button = document.querySelector(".ModeButton")
-const linkbody = "https://raw.githubusercontent.com/Plugin-Warp/Plugin-Warp.github.io/refs/heads/main/"
+const linkbody = "https://raw.githubusercontent.com/Warp-Core-PW/Impact/refs/heads/main/"
 
 const penguinmod = (new URLSearchParams(window.location.search).get('OriginPM') === "true")
 
