@@ -30,10 +30,18 @@ function AddListItem(item, fileTree) {
   listItem.id = item.path;
 
   if (item.type === "dir") {
-    listItem.addEventListener("click", () => toggleFolder(listItem, listItem.id));
-    const subfolder = document.createElement("ul");
-    subfolder.classList.add("subfolder");
-    listItem.appendChild(subfolder);
+    if (item.name === "Mio") { // Change this to your desired folder name
+      listItem.style.color = "black"; // Indicate it's clickable
+      listItem.style.cursor = "pointer";
+      listItem.addEventListener("click", () => {
+        window.open("https://gallery.miyo.lol/", "_blank"); // Change to your desired URL
+      });
+    } else {
+      listItem.addEventListener("click", () => toggleFolder(listItem, listItem.id));
+      const subfolder = document.createElement("ul");
+      subfolder.classList.add("subfolder");
+      listItem.appendChild(subfolder);
+    }
   } else {
     listItem.addEventListener("click", () => Onclick(listItem.id));
   }
@@ -44,8 +52,7 @@ function AddListItem(item, fileTree) {
 // Fetch and display the directory structure
 async function displayRepoContents(path = "extensions") {
   const data = await fetchrepocontents(
-    "https://api.github.com/repos/Warp-Core-PW/Impact/contents/" +
-      path
+    "https://api.github.com/repos/Warp-Core-PW/Impact/contents/" + path
   );
   if (data === null) return;
 
