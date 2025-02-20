@@ -42,9 +42,9 @@ function AddListItem(item, fileTree) {
 }
 
 // Fetch and display the directory structure
-async function displayRepoContents(path = "") {
+async function displayRepoContents(path = "extensions") {
   const data = await fetchrepocontents(
-    "https://api.github.com/repos/Plugin-Warp/Plugin-Warp.github.io/contents/" +
+    "https://api.github.com/repos/Warp-Core-PW/Impact/contents/" +
       path
   );
   if (data === null) return;
