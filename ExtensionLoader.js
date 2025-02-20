@@ -1,5 +1,5 @@
 const apiUrl =
-  "https://api.github.com/repos/Plugin-Warp/Plugin-Warp.github.io/contents/extensions";
+  "https://api.github.com/repos/Warp-Core-PW/Impact/contents/extensions";
 
 const SearchField = document.querySelector(".SearchField");
 
