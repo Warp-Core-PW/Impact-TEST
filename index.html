@@ -171,8 +171,9 @@ fetch("https://raw.githubusercontent.com/Warp-Core-PW/Impact-Site-Configuration/
     const showPopup = data.Popup.ShowPopup;
     const showButton = data.Popup.AllowClosing;
     // Update elements on the page
-    document.getElementById("popupTitle").textContent = popupTitle;
-    document.getElementById("popupMessage").textContent = popupMessage;
+    document.getElementById("popupTitle").innerHTML = popupTitle;
+    //Fix 1 - kkmfd-offical: Forgot to Set this to innerHTML
+    document.getElementById("popupMessage").innerHTML = popupMessage;
   if (showButton == false) {
     document.getElementById("closebtnpopup").style.visibility = "hidden";
 
