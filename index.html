@@ -17,101 +17,17 @@
     <meta name="twitter:title" content="Impact Extensions">
     <meta name="twitter:description" content="Free extensions for WarpCore, The ultimate scratch mod!">
     <meta name="twitter:image" content="https://Warp-Core+PW.github.io/Impact/Images/Thumbnail.png">
-
-    <style>
-        /* Popup Styling */
-        .popup-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            visibility: hidden;
-            opacity: 0;
-            transition: opacity 0.3s ease, visibility 0.3s ease;
-        }
-        .popup {
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            text-align: center;
-            width: 300px;
-            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-        }
-        .popup-header {
-            font-size: 20px;
-            font-weight: bold;
-        }
-        .popup-message {
-            margin: 15px 0;
-        }
-        .close-btn {
-            background: #ff4d4d;
-            color: white;
-            border: none;
-            padding: 10px;
-            cursor: pointer;
-            border-radius: 5px;
-            width: 100%;
-        }
-        .close-btn:hover {
-            background: #cc0000;
-        }
-
-        /* Header Container */
-        .header-container {
-            display: flex;
-            align-items: center;
-            gap: 10px; /* Space between header and button */
-        }
-        .download-btn {
-            background-color: #007bff;
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            font-size: 16px;
-            cursor: pointer;
-            border-radius: 5px;
-        }
-        .download-btn:hover {
-            background-color: #0056b3;
-        }
-
-        /* Center H1 and H2 */
-        h1, h2.ToastingNoa {
-            text-align: center;
-        }
-    </style>
 </head>
 
 <body>
-
-    <!-- Popup Message -->
-    <div id="popupContainer" class="popup-container">
-        <div class="popup">
-            <div class="popup-header" id="popupTitle">Whats New!</div>
-            <div class="popup-message" id="popupMessage">
-                Impact Has been remade with proper credits! <br><br>
-		    -The Warp Core Team
-            </div>
-            <button class="close-btn" id="closebtnpopup" onclick="closePopup()">Close</button>
-        </div>
-    </div>
-
-
-
-
+    <!--Headers and stuff-->
     <h2 class="ToastingNoa">Impact Gallery</h2>
     <h3 class="DiscordServer" style="text-align: center; padding: 1%;">
         <img draggable="false" src="Images/discord.png">
         <a class="Link" href="https://discord.gg/PzFZekdKp4">Join our discord server!</a>
     </h3>
     <h4 style="text-align: center;">Mode: <span><button type="button" data-toggle="null" class="ModeButton">Loading</button></span></h4>
-    
+    <!-- Searchbox-->
     <div class="SearchBox"><input class="SearchField" type="search" placeholder="Search"></div>
     <ul class="file-tree" id="file-tree" data-loaded="false"></ul>
     <div id="file-content"></div>
@@ -119,10 +35,10 @@
     <!-- Spinner for loading -->
     
     <div class="spinner" id="spinner" style="display: block;"></div>
-	
+	<!--Download Repo Function-->
 	<button class="download-btn" onclick="downloadRepo()">Download Impact</button>
-
-    <footer class="Credits/Promo"> 
+	<!--Credits to devs-->
+    <footer class="Credits/Promo/WhatsNew"> 
         <br>Website Owner - Hampter<br>
 	<br>Website Co Owner - FailOmniflow<br>
 	<br>Warpcore tester, and designer - Nae<br>
@@ -130,61 +46,17 @@
 	<br>(former) Developer - Lord cat (noa)<br>
 	<br>Really Cool Guy - Lou<br>
 	<br>Website Hoster - Github<br>
-        Check out <a class="Link" href="https://Warp-Core-PW.github.io/Uploader/">WarpLoad</a> and 
-        <a class="Link" href="https://Warp-Core-PW.github.io/WarpForge/editor/">WarpForge</a> - Hampter
+	<br>Whats New! Added Credits<br>
+        <br>Check out <a class="Link" href="https://Warp-Core-PW.github.io/Uploader/">WarpLoad</a> and 
+        <a class="Link" href="https://Warp-Core-PW.github.io/WarpForge/editor/">WarpForge</a> - Hampter<br>
     </footer>
 
-
+    <!--Script Loading-->
     <script src="ExtensionLoader.js"></script>
     <script src="ExtensionDownloader.js"></script>
 
-
-    <script>
-        // Function to Open Popup
-        function openPopup() {
-            document.getElementById("popupContainer").style.visibility = "visible";
-            document.getElementById("popupContainer").style.opacity = "1";
-        }
-
-        // Function to Close Popup
-        function closePopup() {
-            document.getElementById("popupContainer").style.opacity = "0";
-            setTimeout(() => {
-                document.getElementById("popupContainer").style.visibility = "hidden";
-            }, 300);
-        }
-
-        // Auto-open popup after 1 second
-        //Handling the popup
-	
-fetch("https://raw.githubusercontent.com/Warp-Core-PW/Impact-Site-Configuration/main/popup-settings.json")
-  .then(response => {
-    if (!response.ok) {
-      throw new Error("Failed to fetch the file");
-    }
-    return response.json();
-  })
-  .then(data => {
-    // Jessie We Need To Cook 🥠 
-    const popupTitle = data.Popup.PopupTitle;
-    const popupMessage = data.Popup.PopupMessage;
-    const showPopup = data.Popup.ShowPopup;
-    const showButton = data.Popup.AllowClosing;
-    // Update elements on the page
-    document.getElementById("popupTitle").innerHTML = popupTitle;
-    //Fix 1 - kkmfd-offical: Forgot to Set this to innerHTML
-    document.getElementById("popupMessage").innerHTML = popupMessage;
-  if (showButton == false) {
-    document.getElementById("closebtnpopup").style.visibility = "hidden";
-
-  }
-   if (showPopup == "true") {
-        setTimeout(openPopup, 1000);
-   }
-  })
-  .catch(error => { 
-    console.error("Error fetching or parsing JSON:", error);
-  });
+  <!--Scripts that dont need to be in another file-->
+   <script>
         // Function to Download Repo ZIP
         function downloadRepo() {
             window.location.href = "https://github.com/Warp-Core-PW/Impact/archive/refs/heads/main.zip";
