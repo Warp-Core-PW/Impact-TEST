@@ -30,11 +30,11 @@ function AddListItem(item, fileTree) {
   listItem.id = item.path;
 
   if (item.type === "dir") {
-    if (item.name === "Mio") { // Change this to your desired folder name
-      listItem.style.color = "black"; // Indicate it's clickable
+    if (item.name === "Mio") {
+      listItem.style.color = "black";
       listItem.style.cursor = "pointer";
       listItem.addEventListener("click", () => {
-        window.open("https://gallery.miyo.lol/", "_blank"); // Change to your desired URL
+        window.open("https://gallery.miyo.lol/", "_blank");
       });
     } else {
       listItem.addEventListener("click", () => toggleFolder(listItem, listItem.id));
@@ -44,6 +44,19 @@ function AddListItem(item, fileTree) {
     }
   } else {
     listItem.addEventListener("click", () => Onclick(listItem.id));
+    
+    // Create and append the copy link button
+    const copyButton = document.createElement("button");
+    copyButton.textContent = "Copy Link";
+    copyButton.style.marginLeft = "10px";
+    copyButton.addEventListener("click", (event) => {
+      event.stopPropagation(); // Prevent triggering file click
+      const fileUrl = `https://raw.githubusercontent.com/Warp-Core-PW/Impact/main/${item.path}`;
+      navigator.clipboard.writeText(fileUrl).then(() => {
+        alert("Link copied to clipboard");
+      });
+    });
+    listItem.appendChild(copyButton);
   }
 
   fileTree.appendChild(listItem);
@@ -58,9 +71,8 @@ async function displayRepoContents(path = "extensions") {
 
   const fileTree = document.getElementById("file-tree");
   const spinner = document.getElementById("spinner");
-  fileTree.innerHTML = ""; // Clear previous content
+  fileTree.innerHTML = "";
 
-  // Process internal items
   if (Array.isArray(data)) {
     for (const item of data) {
       if (item.type === "file" && item.name.endsWith(".author")) continue;
@@ -68,7 +80,6 @@ async function displayRepoContents(path = "extensions") {
     }
   }
 
-  // Add Back Button if not at the root 'extensions' directory
   if (path !== "extensions") {
     const listItem = document.createElement("li");
     listItem.classList.add("backbutton");
@@ -103,5 +114,4 @@ function OnSearch() {
 
 SearchField.addEventListener("input", OnSearch);
 
-// Initialize the repo viewer
 displayRepoContents("extensions");
