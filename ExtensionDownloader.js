@@ -1,13 +1,13 @@
-const Button = document.querySelector(".ModeButton")
-const linkbody = "https://raw.githubusercontent.com/Warp-Core-PW/Impact/refs/heads/main/"
+const Button = document.querySelector(".ModeButton");
+const linkbody = "https://raw.githubusercontent.com/Warp-Core-PW/Impact/refs/heads/main/";
 
-const penguinmod = (new URLSearchParams(window.location.search).get('OriginPM') === "true")
+const penguinmod = (new URLSearchParams(window.location.search).get('OriginPM') === "true");
 
 function CopyToPM(Url) {
     const messager = window.opener || window.parent;
     if (!messager) return alert("Failed to request to PenguinMod!");
     messager.postMessage({
-      loadExt: Url
+        loadExt: Url
     }, "https://studio.penguinmod.com");
 }
 
@@ -22,29 +22,35 @@ function downloadStringAsFile(content, fileName, contentType) {
 }
 
 async function CopyToClipboard(Data) {
-    navigator.clipboard.writeText(Data)
+    navigator.clipboard.writeText(Data).then(() => {
+        alert("Copied to clipboard!");
+    }).catch(err => {
+        alert("Failed to copy text!");
+        console.error(err);
+    });
+}
+
+function CopyLinkToClipboard(ExtName) {
+    const fullLink = linkbody + ExtName;
+    CopyToClipboard(fullLink);
 }
 
 function ToggleToString(Bool) {
-    if (Bool == "true") {
-        return "false"
-    } else{
-        return "true"
-    }
+    return Bool === "true" ? "false" : "true";
 }
 
 function ToggleButton(ToggleValue, CopyValues) {
-    if (CopyValues == true) {
-        setCookie("PreferCopy", ToggleValue)
+    if (CopyValues) {
+        setCookie("PreferCopy", ToggleValue);
     }
-    if (ToggleValue == "true") {
-        Button.textContent = "Copy code"
-        Button.dataset.toggle = true
-    }else {
-        document.querySelector(".ModeButton").textContent = "Download";
-        document.querySelector(".ModeButton").dataset.toggle = false
+    if (ToggleValue === "true") {
+        Button.textContent = "Copy code";
+        Button.dataset.toggle = true;
+    } else {
+        Button.textContent = "Download";
+        Button.dataset.toggle = false;
     }
- }
+}
 
 const getCookie = (name) => {
     return document.cookie
@@ -55,53 +61,66 @@ const getCookie = (name) => {
 
 function setCookie(name, value) {
     const expires = "expires=Fri, 31 Dec 9999 23:59:59 GMT";
-    document.cookie = name + "=" + value + ";" + expires + ";path=/";
-     }
+    document.cookie = `${name}=${value}; ${expires}; path=/`;
+}
 
-     if (getCookie("PreferCopy") == undefined) {
-        setCookie("PreferCopy", "false")
-     }
+if (getCookie("PreferCopy") === undefined) {
+    setCookie("PreferCopy", "false");
+}
 
-     async function fetchData(FileName) {
-        try {
-            console.log(linkbody + FileName)
-            const response = await fetch(linkbody + FileName);
-            if (!response.ok) {
-                alert(`Failed to fetch extension code for: ${FileName}`)
-                return null
-            }
-            const data = await response.text();
-            return data // This will log the plain text data to the console
-        } catch (error) {
-            alert(`Failed to fetch extension code for: ${FileName}`)
-            return null
+async function fetchData(FileName) {
+    try {
+        console.log(linkbody + FileName);
+        const response = await fetch(linkbody + FileName);
+        if (!response.ok) {
+            alert(`Failed to fetch extension code for: ${FileName}`);
+            return null;
         }
+        return await response.text();
+    } catch (error) {
+        alert(`Failed to fetch extension code for: ${FileName}`);
+        return null;
     }
-    
+}
 
 async function Onclick(ExtName) {
     if (penguinmod) {
-        CopyToPM(linkbody + ExtName)
+        CopyToPM(linkbody + ExtName);
     } else {
-    const ExtData = await fetchData(ExtName)
-    if (ExtData == null) {
-        return
+        const ExtData = await fetchData(ExtName);
+        if (!ExtData) return;
+        if (getCookie("PreferCopy") === "true") {
+            CopyToClipboard(ExtData);
+        } else {
+            downloadStringAsFile(ExtData, ExtName, "text/javascript");
+        }
     }
-    console.log(ExtData)
-if (getCookie("PreferCopy") == "true") {
-CopyToClipboard(ExtData)
-console.log("clicked")
-alert("Copied to clipboard!")
-}else{
-downloadStringAsFile(ExtData, ExtName, "text/javascript")
 }
-}
-}
-ToggleButton(getCookie("PreferCopy"), false)
+
+ToggleButton(getCookie("PreferCopy"), false);
+
 if (penguinmod) {
-    Button.disabled = true
-    Button.textContent = "Copy to penguinmod"
+    Button.disabled = true;
+    Button.textContent = "Copy to PenguinMod";
 } else {
-    Button.style.cursor = "Pointer"
-    Button.addEventListener('click', () => ToggleButton(ToggleToString(getCookie("PreferCopy")), true))
+    Button.style.cursor = "pointer";
+    Button.addEventListener('click', () => ToggleButton(ToggleToString(getCookie("PreferCopy")), true));
+
+    // Create "Copy Link" button
+    const copyLinkButton = document.createElement("button");
+    copyLinkButton.textContent = "Copy Link";
+    copyLinkButton.classList.add("CopyLinkButton");
+    copyLinkButton.style.marginLeft = "10px";
+    copyLinkButton.style.cursor = "pointer";
+
+    // Add event listener
+    copyLinkButton.addEventListener("click", () => {
+        const extName = prompt("Enter the extension filename:");
+        if (extName) {
+            CopyLinkToClipboard(extName);
+        }
+    });
+
+    // Insert next to ModeButton
+    Button.parentNode.insertBefore(copyLinkButton, Button.nextSibling);
 }
