@@ -190,11 +190,11 @@ class FourndyMathComparisons {
     for (let i = 1; i <= args.NUM2; i++) {
       factorial *= i;
     }
-    return Math.abs(factorial - args.NUM1) < 1e-9;
+    return factorial === args.NUM1;
   }
 
   isLog(args) {
-    return Math.abs(Math.log(args.NUM2) / Math.log(args.BASE) - args.NUM1) < 1e-9;
+    return Math.log(args.NUM2) / Math.log(args.BASE) === args.NUM1;
   }
 
   isPrime(args) {
@@ -207,21 +207,19 @@ class FourndyMathComparisons {
 
   isFibonacci(args) {
     const isPerfectSquare = (x) =>
-      Math.abs(Math.sqrt(x) - Math.round(Math.sqrt(x))) < 1e-9;
+      Number.isInteger(Math.sqrt(x)) && Math.sqrt(x) % 1 === 0;
     return (
       isPerfectSquare(5 * args.NUM ** 2 + 4) ||
       isPerfectSquare(5 * args.NUM ** 2 - 4)
     );
   }
 
-    isPerfectSquare(args) {
-    const sqrt = Math.sqrt(args.NUM);
-    return Math.abs(sqrt - Math.round(sqrt)) < 1e-9;
+  isPerfectSquare(args) {
+    return Number.isInteger(Math.sqrt(args.NUM));
   }
 
   isPerfectCube(args) {
-    const cbrt = Math.cbrt(args.NUM);
-    return Math.abs(cbrt - Math.round(cbrt)) < 1e-9;
+    return Number.isInteger(Math.cbrt(args.NUM));
   }
 
   isEven(args) {
@@ -237,22 +235,20 @@ class FourndyMathComparisons {
   }
 
   isCos(args) {
-    return Math.abs(Math.cos(args.NUM2) - args.NUM1) < 1e-9;
+    return Math.cos(args.NUM2) === args.NUM1;
   }
 
   isTan(args) {
-    return Math.abs(Math.tan(args.NUM2) - args.NUM1) < 1e-9;
+    return Math.tan(args.NUM2) === args.NUM1;
   }
 
   isSin(args) {
-    return Math.abs(Math.sin(args.NUM2) - args.NUM1) < 1e-9;
+    return Math.sin(args.NUM2) === args.NUM1;
   }
 
   isSqrt(args) {
-    return Math.abs(Math.sqrt(args.NUM2) - args.NUM1) < 1e-9;
+    return Math.sqrt(args.NUM2) === args.NUM1;
   }
 }
 
 Scratch.extensions.register(new FourndyMathComparisons());
-
-                  
