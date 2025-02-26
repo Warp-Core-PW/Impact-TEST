@@ -69,4 +69,4 @@ function createPopup() {
 }
 
 // Show popup after 2 seconds
-setTimeout(createPopup, 2000);
+setTimeout(createPopup, 1);
