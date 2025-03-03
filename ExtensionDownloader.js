@@ -81,12 +81,24 @@ function setCookie(name, value) {
 
 async function Onclick(ExtName) {
     if (penguinmod) {
-        CopyToPM(linkbody + ExtName)
+        CopyToPM(linkbody + ExtName);
+        alert("Extension sent to PenguinMod!");
     } else {
-    const ExtData = await fetchData(ExtName)
-    if (ExtData == null) {
-        return
+        const ExtData = await fetchData(ExtName);
+        if (ExtData == null) {
+            return;
+        }
+        console.log(ExtData);
+        if (getCookie("PreferCopy") == "true") {
+            CopyToClipboard(ExtData);
+            console.log("clicked");
+            alert("Copied to clipboard!");
+        } else {
+            downloadStringAsFile(ExtData, ExtName, "text/javascript");
+        }
     }
+}
+
     console.log(ExtData)
 if (getCookie("PreferCopy") == "true") {
 CopyToClipboard(ExtData)
