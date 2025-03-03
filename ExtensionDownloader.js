@@ -80,7 +80,7 @@ function setCookie(name, value) {
     
 
 async function Onclick(ExtName) {
-    if (penguinmod) {
+    if (OrginPM) {
         CopyToPM(linkbody + ExtName);
         alert("Extension sent to PenguinMod!");
     } else {
