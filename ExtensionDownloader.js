@@ -1,16 +1,6 @@
 const Button = document.querySelector(".ModeButton")
 const linkbody = "https://raw.githubusercontent.com/Warp-Core-PW/Impact/refs/heads/main/"
 
-const penguinmod = (new URLSearchParams(window.location.search).get('OriginPM') === "true")
-
-function CopyToPM(Url) {
-    const messager = window.opener || window.parent;
-    if (!messager) return alert("Failed to request to PenguinMod!");
-    messager.postMessage({
-      loadExt: Url
-    }, "https://studio.penguinmod.com");
-}
-
 function downloadStringAsFile(content, fileName, contentType) {
     const blob = new Blob([content], { type: contentType });
     const a = document.createElement('a');
@@ -97,11 +87,4 @@ downloadStringAsFile(ExtData, ExtName, "text/javascript")
 }
 }
 }
-ToggleButton(getCookie("PreferCopy"), false)
-if (penguinmod) {
-    Button.disabled = true
-    Button.textContent = "Copy to penguinmod"
-} else {
-    Button.style.cursor = "Pointer"
-    Button.addEventListener('click', () => ToggleButton(ToggleToString(getCookie("PreferCopy")), true))
-}
+ToggleButton(getCookie("PreferCopy"), true)
