@@ -45,44 +45,22 @@ function AddListItem(item, fileTree) {
   } else {
     listItem.addEventListener("click", () => Onclick(listItem.id));
     
-    const fileUrl = `https://raw.githubusercontent.com/Warp-Core-PW/Impact/main/${item.path}`;
-
-    // Create and append the "Copy Link" button
+    // Create and append the copy link button
     const copyButton = document.createElement("button");
     copyButton.textContent = "Copy Link";
     copyButton.style.marginLeft = "10px";
     copyButton.addEventListener("click", (event) => {
       event.stopPropagation(); // Prevent triggering file click
+      const fileUrl = https://raw.githubusercontent.com/Warp-Core-PW/Impact/main/${item.path};
       navigator.clipboard.writeText(fileUrl).then(() => {
         alert("Link copied to clipboard");
       });
     });
-
-    // Create and append the "Copy To PM" button
-    const copyToPMButton = document.createElement("button");
-    copyToPMButton.textContent = "Copy To PM";
-    copyToPMButton.style.marginLeft = "5px";
-    copyToPMButton.addEventListener("click", (event) => {
-      event.stopPropagation(); // Prevent triggering file click
-      CopyToPM(fileUrl);
-    });
-
     listItem.appendChild(copyButton);
-    listItem.appendChild(copyToPMButton);
   }
 
   fileTree.appendChild(listItem);
 }
-
-// Function to send the URL to PenguinMod
-function CopyToPM(Url) {
-  const messager = window.opener || window.parent;
-  if (!messager) return alert("Failed to request to PenguinMod!");
-  messager.postMessage({
-    loadExt: Url
-  }, "https://studio.penguinmod.com");
-}
-
 
 // Fetch and display the directory structure
 async function displayRepoContents(path = "extensions") {
