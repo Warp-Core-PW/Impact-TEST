@@ -51,7 +51,7 @@ function AddListItem(item, fileTree) {
     copyButton.style.marginLeft = "10px";
     copyButton.addEventListener("click", (event) => {
       event.stopPropagation(); // Prevent triggering file click
-      const fileUrl = https://raw.githubusercontent.com/Warp-Core-PW/Impact/main/${item.path}
+      const fileUrl = https://raw.githubusercontent.com/Warp-Core-PW/Impact/main/${item.path};
       navigator.clipboard.writeText(fileUrl).then(() => {
         alert("Link copied to clipboard");
       });
