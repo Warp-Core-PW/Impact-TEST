@@ -112,7 +112,83 @@ h1 {
 }
 
 .Link:hover{
-    color: #BC03B5;
+    color: #BC03B5 /* General Styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        h1 {
+            margin-top: 20px;
+        }
+
+        /* Header */
+        nav {
+            margin: 20px 0;
+        }
+        .discord-btn {
+            display: inline-flex;
+            align-items: center;
+            background: #7289DA;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+        .discord-btn img {
+            width: 20px;
+            margin-right: 10px;
+        }
+
+        /* Search Box */
+        .search-container {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
+        .search-field {
+            width: 50%;
+            max-width: 400px;
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        /* Buttons */
+        .button-group {
+            margin: 20px 0;
+        }
+        .flat-btn {
+            background: #007bff;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        .flat-btn:hover {
+            background: #0056b3;
+        }
+
+        /* Footer */
+        .credits {
+            background: #222;
+            color: white;
+            padding: 15px;
+            margin-top: 30px;
+        }
+        .credits ul {
+            list-style: none;
+            padding: 0;
+        }
+        .credits li {
+            margin: 5px 0;
+        }
 }
 
 .DiscordServer{
